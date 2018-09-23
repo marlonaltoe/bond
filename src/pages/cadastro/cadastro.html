@@ -15,48 +15,49 @@
 
 
 <ion-content padding>
-  <form padding [formGroup]="cadastroForm" (submit)="cadastrarUsuario()" novalidate>
+  <form padding #frm="ngForm" (ngSubmit)="cadastrarUsuario(frm)" novalidate>
     <ion-list>
       <ion-item>
         <ion-label floating>Nome</ion-label>
-        <ion-input [(ngModel)]="nome" formControlName="nome" type="text">
+        <ion-input [(ngModel)]="usuario.nome" name="nome" type="text">
         </ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Login</ion-label>
-        <ion-input [(ngModel)]="login" formControlName="login" type="text">
+        <ion-input [(ngModel)]="usuario.login" name="login" type="text">
         </ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Senha</ion-label>
-        <ion-input [(ngModel)]="senha" formControlName="senha" type="password"></ion-input>
+        <ion-input [(ngModel)]="usuario.senha" name="senha" type="password"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Confirme a senha</ion-label>
-        <ion-input formControlName="confirmeSenha" type="password"></ion-input>
+        <ion-input type="password"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>E-mail</ion-label>
-        <ion-input [(ngModel)]="email" formControlName="email" type="text">
+        <ion-input [(ngModel)]="usuario.email" name="email" type="text">
         </ion-input>
       </ion-item>
     </ion-list>
     <ion-list>
       <ion-item>
         <ion-label>Tipo Pessoa</ion-label>
-        <ion-select [(ngModel)]="tppessoa" formControlName="tppessoa">
-          <ion-option value="PF">Física</ion-option>
-          <ion-option value="PJ">Jurídica</ion-option>
+        <ion-select [(ngModel)]="usuario.tppessoa" name="tpPessoa">
+          <ion-option value="F">Física</ion-option>
+          <ion-option value="J">Jurídica</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
     <ion-item>
       <ion-label floating>CPF/CNPJ</ion-label>
-      <ion-input [(ngModel)]="nrcpfcnpj" formControlName="nrcpfcnpj" type="text">
+      <!--<ion-input [(ngModel)]="nrcpfcnpj" formControlName="nrcpfcnpj" type="text">-->
+      <ion-input [(ngModel)]="usuario.nrcpfcnpj" name="nrcpfcnpj" type="text">
       </ion-input>
     </ion-item>
     <div class="divButton">
-      <button class="button" ion-button block color="secondary" outline>Confirmar</button>
+      <button class="button" [disabled]="frm.invalid" ion-button block color="secondary" outline>Confirmar</button>
     </div>
   </form>
 </ion-content>

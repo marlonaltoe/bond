@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { RequestOptions } from '@angular/http';
+import { Platform } from 'ionic-angular/umd';
 
 /*
   Generated class for the BondProvider provider.
@@ -12,16 +13,52 @@ import { RequestOptions } from '@angular/http';
 @Injectable()
 export class BondProvider {
 
-  private baseApiPath = "http://localhost:63431"; //urlBase
+  //private url = "http://localhost:63431/api"; //urlBase
+  private url = "http://localhost:63431/api"; //urlBase
   
+  constructor(
+    public http: HttpClient
+    //private _platform: Platform
+    ) {
+      /*if(this._platform.is("cordova")){
+        this.url = "http://localhost:63431/api";*/
+      //}
+  }
+
+  get(endpoint: string, params?: any, reqOpts?: any) {
+    if (!reqOpts) {
+      reqOpts = {
+        params: new HttpParams()
+      };
+    }
+
+    // Support easy query params for GET requests
+    if (params) {
+      reqOpts.params = new HttpParams();
+      for (let k in params) {
+        reqOpts.params = reqOpts.params.set(k, params[k]);
+      }
+    }
+
+    return this.http.get(this.url + '/' + endpoint, reqOpts).toPromise();
+  }
+
+  post(endpoint: string, body: any, reqOpts?: any) {
+    //body = "{\"cdusuario\": 19,\"nome\": \"Caroline\",\"tppessoa\": \"F\",\"login\": \"carolpo\",\"senha\": \"12345\",\"email\": \"teste\",\"nrcpfcnpj\": \"11111111\"}";
+        return this.http.post(this.url + '/' + endpoint, body, reqOpts).toPromise();
+  }
+
+  put(endpoint: string, body: any, reqOpts?: any) {
+    return this.http.put(this.url + '/' + endpoint, body, reqOpts);
+  }
+
+  delete(endpoint: string, reqOpts?: any) {
+    return this.http.delete(this.url + '/' + endpoint, reqOpts);
+  }
+
+  patch(endpoint: string, body: any, reqOpts?: any) {
+    return this.http.patch(this.url + '/' + endpoint, body, reqOpts);
+  }
+
      
-  constructor(public http: HttpClient) {
-    console.log('Hello BondProvider Provider');
-  }
-
-  postUser(body : any){
-    //body = "{\"cdusuario\": 18,\"nome\": \"Caroline\",\"tppessoa\": \"F\",\"login\": \"carolpo\",\"senha\": \"12345\",\"email\": \"teste\",\"nrcpfcnpj\": \"11111111\"}";
-    return this.http.post(this.baseApiPath + "/api/Usuario",body);
-  }
-
 }

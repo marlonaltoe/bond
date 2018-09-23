@@ -15,12 +15,14 @@ import { NgModel, FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class CadastroPage {
 
   cadastroForm: FormGroup;
+  usuario: any;
 
   constructor(public navCtrl: NavController
             , public navParams: NavParams
             , private bondProvider: BondProvider
-            , public formBuilder: FormBuilder) {
-      this.cadastroForm = formBuilder.group({
+            , public formBuilder: FormBuilder
+            , public api: BondProvider) {
+      /*this.cadastroForm = formBuilder.group({
         cdusuario: ['19', Validators.required],
         nome: ['', Validators.required],
         senha: ['', Validators.compose([Validators.minLength(6), Validators.maxLength(20),
@@ -30,14 +32,14 @@ export class CadastroPage {
         confirmeSenha: ['', Validators.required],
         email: ['', Validators.nullValidator],
         tppessoa: ['', Validators.nullValidator],
-      });
+      });*/
   }
 
 
-  post(data: any): Promise<Object> {
+  /*post(): Promise<Object> {
     return new Promise((resolve, reject) => {
 
-      return this.bondProvider.postUser(data).subscribe(
+      return this.bondProvider.postUser(this.usuario).subscribe(
         (result: any) => {
           resolve(JSON.parse(result));
         },
@@ -47,17 +49,22 @@ export class CadastroPage {
           reject(err);
         });
     });
+  }*/
+
+  ngOnInit(){
+    this.usuario = {};
   }
 
-  cadastrarUsuario() {
-    
+  cadastrarUsuario(frm: FormGroup) {
     //console.log(this.cadastroForm.value);
-      this.post(this.cadastroForm.value).then(
+    //let data = this.cadastroForm.value;
+    //let teste = JSON.parse(data);
+
+    return this.api.post('usuario',this.usuario).then(
         data => {
           console.log(data);
         }
       )
-    
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad CadastroPage');
