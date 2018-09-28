@@ -44,7 +44,7 @@ export class BondProvider {
   }
 
   post(endpoint: string, body: any, reqOpts?: any) {
-    //body = "{\"cdusuario\": 19,\"nome\": \"Caroline\",\"tppessoa\": \"F\",\"login\": \"carolpo\",\"senha\": \"12345\",\"email\": \"teste\",\"nrcpfcnpj\": \"11111111\"}";
+    
         return this.http.post(this.url + '/' + endpoint, body, reqOpts).toPromise();
   }
 

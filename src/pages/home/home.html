@@ -14,25 +14,28 @@
 
 
 <ion-content padding>
-    <div class="login">
-      <div class="logo">
-          <img src="assets/imgs/bond.png"/>
-      </div>
-      <ion-item>
-        <ion-label floating>Usuário</ion-label>
-        <ion-input id="txtUsuario" type="text">
-        </ion-input>
-      </ion-item>
-      <ion-item>
-          <ion-label floating>Senha</ion-label>
-          <ion-input id="txtSenha" type="password"></ion-input>
-      </ion-item>
-      <div class="divButton">
-        <button class="button" ion-button block color="secondary" outline (click)="efetuarLogin()">Entrar</button>
-      </div>  
-      <div class="linkLogin">
-        <a (click)="efetuarCadastro()">Cadastre-se aqui</a>
-      </div>
+  <div class="login">
+    <div class="logo">
+      <img src="assets/imgs/bond.png" />
     </div>
+    <form padding #frm="ngForm" (ngSubmit)="efetuarLogin(frm)" novalidate>
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Usuário</ion-label>
+          <ion-input [(ngModel)]="login.usuario" name="usuario" type="text">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Senha</ion-label>
+          <ion-input [(ngModel)]="login.senha" name="senha" type="password"></ion-input>
+        </ion-item>
+      </ion-list>
+      <div class="divButton">
+        <button class="button" ion-button block color="secondary" outline>Entrar</button>
+      </div>
+    </form>
+    <div class="linkLogin">
+      <a (click)="efetuarCadastro()">Cadastre-se aqui</a>
+    </div>
+  </div>
 </ion-content>
-

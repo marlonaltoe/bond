@@ -22,43 +22,15 @@ export class CadastroPage {
             , private bondProvider: BondProvider
             , public formBuilder: FormBuilder
             , public api: BondProvider) {
-      /*this.cadastroForm = formBuilder.group({
-        cdusuario: ['19', Validators.required],
-        nome: ['', Validators.required],
-        senha: ['', Validators.compose([Validators.minLength(6), Validators.maxLength(20),
-        Validators.required])],
-        login: ['', Validators.required],
-        nrcpfcnpj: ['', Validators.required],
-        confirmeSenha: ['', Validators.required],
-        email: ['', Validators.nullValidator],
-        tppessoa: ['', Validators.nullValidator],
-      });*/
+
   }
 
-
-  /*post(): Promise<Object> {
-    return new Promise((resolve, reject) => {
-
-      return this.bondProvider.postUser(this.usuario).subscribe(
-        (result: any) => {
-          resolve(JSON.parse(result));
-        },
-        err => {
-
-          console.log("HTTP log:", err);
-          reject(err);
-        });
-    });
-  }*/
 
   ngOnInit(){
     this.usuario = {};
   }
 
   cadastrarUsuario(frm: FormGroup) {
-    //console.log(this.cadastroForm.value);
-    //let data = this.cadastroForm.value;
-    //let teste = JSON.parse(data);
 
     return this.api.post('usuario',this.usuario).then(
         data => {
@@ -68,31 +40,6 @@ export class CadastroPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad CadastroPage');
-
-
-
-    /* this.bondProvider.postUser().subscribe(
-       (data) => {
-         const response = (data as any); //converte data para qualquer coisa
-         const objeto_retorno = JSON.parse(response._body); //transforma o texto de retorno em JSON
-         console.log(objeto_retorno);
-       },
-       error => {
-         console.log(error);
-       }
-     );*/
-
-    /*this.bondProvider.postUser().subscribe(
-      data => {
-        const response = (data as any); //converte data para qualquer coisa
-        const objeto_retorno = JSON.parse(response._body); //transforma o texto de retorno em JSON
-        console.log(objeto_retorno);
-      },
-      error => {
-        console.log(error);
-      }
-    );*/
-
 
   }
 
